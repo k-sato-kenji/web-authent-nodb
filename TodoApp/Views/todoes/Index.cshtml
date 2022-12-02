@@ -1,0 +1,68 @@
+﻿<!--　１行目のモデル行はコントローラーから受け取るデータの定義です。　-->
+<!--　此処では、TodoApp クラスのリストを受け取る。　-->
+
+@model IEnumerable<TodoApp.Models.todo>
+
+<!--　＠から始まるブロックはレーザーのコードターゲットと呼ばれる　-->
+<!--　サーバーサイドで処理される　-->
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+
+<!--　ActionLinkを生成するメソッド -->
+<!--　此処では、Create画面へのリンクを生成している -->
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<!--　DisplayNameForはモデルの定義に応じてプロパティの表示名を出ろする -->
+<!--　現在は特に表示名を指定がないため該当箇所にプロパティー名が表示される　-->
+
+<table class="table">
+    <tr>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.summary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.limit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.done)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.summary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.detail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.limit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.done)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>
